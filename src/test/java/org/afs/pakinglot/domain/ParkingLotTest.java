@@ -72,7 +72,7 @@ class ParkingLotTest {
     void should_return_nothing_with_error_message_when_fetch_given_a_parking_lot_and_an_unrecognized_ticket() {
         // Given
         ParkingLot parkingLot = new ParkingLot();
-        Ticket unrecognizedTicket = new Ticket(CarPlateGenerator.generatePlate(), 1, 1);
+        Ticket unrecognizedTicket = new Ticket(CarPlateGenerator.generatePlate(), 1, parkingLot);
         // When
         // Then
         UnrecognizedTicketException exception =
