@@ -1,8 +1,7 @@
 package org.afs.pakinglot.domain.strategies;
 
 
-import org.afs.pakinglot.domain.ParkingLot;
-import org.afs.pakinglot.domain.exception.NoAvailablePositionException;
+import org.afs.pakinglot.model.ParkingLot;
 
 import java.util.Comparator;
 import java.util.List;
@@ -12,6 +11,6 @@ public class MaxAvailableStrategy implements ParkingStrategy{
     public ParkingLot findParkingLot(List<ParkingLot> parkingLots) {
         return parkingLots.stream()
                 .max(Comparator.comparingInt(ParkingLot::getAvailableCapacity))
-                .orElseThrow(NoAvailablePositionException::new);
+                .orElseThrow();
     }
 }

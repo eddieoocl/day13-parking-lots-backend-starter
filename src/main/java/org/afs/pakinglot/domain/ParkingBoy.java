@@ -6,6 +6,9 @@ import java.util.List;
 import org.afs.pakinglot.domain.exception.UnrecognizedTicketException;
 import org.afs.pakinglot.domain.strategies.ParkingStrategy;
 import org.afs.pakinglot.domain.strategies.SequentiallyStrategy;
+import org.afs.pakinglot.model.Car;
+import org.afs.pakinglot.model.ParkingLot;
+import org.afs.pakinglot.model.Ticket;
 
 public class ParkingBoy {
     protected List<ParkingLot> parkingLots = new ArrayList<>();

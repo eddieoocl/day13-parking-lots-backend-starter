@@ -1,19 +1,37 @@
-package org.afs.pakinglot.domain;
+package org.afs.pakinglot.model;
 
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import org.afs.pakinglot.domain.exception.NoAvailablePositionException;
 import org.afs.pakinglot.domain.exception.UnrecognizedTicketException;
 
+@Entity
+@Getter
+@Setter
+@AllArgsConstructor
 public class ParkingLot {
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
     private String name;
+
+    private final int capacity;
+
+
+    @OneToMany(mappedBy = "parkingLot", cascade = CascadeType.ALL, orphanRemoval = true)
+    @MapKeyJoinColumn(name = "ticket_id")
     private final Map<Ticket, Car> tickets = new HashMap<>();
 
     private static final int DEFAULT_CAPACITY = 10;
-    private final int capacity;
+
 
     public ParkingLot() {
         this(DEFAULT_CAPACITY);
@@ -23,15 +41,6 @@ public class ParkingLot {
         this.capacity = capacity;
     }
 
-    public ParkingLot(int id, String name, int capacity) {
-        this.id = id;
-        this.name = name;
-        this.capacity = capacity;
-    }
-
-    public int getCapacity() {
-        return capacity;
-    }
 
     public int getAvailableCapacity() {
         return capacity - tickets.size();
@@ -42,7 +51,7 @@ public class ParkingLot {
             throw new NoAvailablePositionException();
         }
 
-        Ticket ticket = new Ticket(car.plateNumber(), tickets.size() + 1, this.id);
+        Ticket ticket = new Ticket(car.getPlateNumber(), tickets.size() + 1, this);
         tickets.put(ticket, car);
         return ticket;
     }
@@ -65,14 +74,6 @@ public class ParkingLot {
 
     public double getAvailablePositionRate() {
         return getAvailableCapacity() / (double) capacity;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public List<Ticket> getTickets() {

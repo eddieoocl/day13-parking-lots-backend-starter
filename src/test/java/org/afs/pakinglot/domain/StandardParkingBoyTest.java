@@ -7,6 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.util.List;
 import org.afs.pakinglot.domain.exception.NoAvailablePositionException;
 import org.afs.pakinglot.domain.exception.UnrecognizedTicketException;
+import org.afs.pakinglot.model.Car;
+import org.afs.pakinglot.model.ParkingLot;
+import org.afs.pakinglot.model.Ticket;
 import org.junit.jupiter.api.Test;
 
 class StandardParkingBoyTest {
