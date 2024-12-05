@@ -45,8 +45,6 @@ public class ParkingBoyService {
 
         car.setTicket(savedTicket);
 
-        carRepository.save(car);
-
         return savedTicket;
     }
 

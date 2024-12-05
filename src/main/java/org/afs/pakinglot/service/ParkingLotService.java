@@ -10,9 +10,9 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class ParkingLotService {
-    private final ParkingLotRepository parkingLotRepository;
+    private final ParkingLotRepository parkingBoyRepository;
 
     public List<ParkingLot> findAll() {
-        return parkingLotRepository.findAll();
+        return parkingBoyRepository.findAll();
     }
 }

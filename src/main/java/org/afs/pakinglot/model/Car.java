@@ -1,6 +1,7 @@
 package org.afs.pakinglot.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
@@ -20,13 +21,9 @@ public class Car {
     @Id
     private String plateNumber;
 
-    @OneToOne
     @JsonIgnore
+    @OneToOne(cascade = CascadeType.MERGE, orphanRemoval = true)
     private Ticket ticket;
-
-    @OneToOne
-    @JsonIgnore
-    private ParkingLot parkingLot;
 
     public Car(String plateNumber) {
         this.plateNumber = plateNumber;

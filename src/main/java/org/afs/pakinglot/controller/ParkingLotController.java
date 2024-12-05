@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/parkinglots")
+@RequestMapping("/parkingLots")
 public class ParkingLotController {
     private final ParkingLotService parkingLotService;
 

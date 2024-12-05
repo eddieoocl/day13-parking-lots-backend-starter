@@ -15,3 +15,7 @@
 - Help me write a enum called ParkingStrategies that is return the three ParkingStrategy: Standard, Smart, and SuperSmart.   
   Write an GET API /parkingBoys that return this enum values.
   Write an POST API /parkingBoys/park that use ParkingBoy to park the car and save it in ticketRepository and carRepository.
+- Please help me write controller test for ParkingBoy that is similar to the ParkingLotControllerTest. 
+  The test function name should be in the form of should_<expected result>_when_<action>_given_<given condition> Use `@SpringBootTest`, `@AutoConfigureJsonTesters`, `@AutoConfigureMockMvc` and `JacksonTester`.  
+  Add a `@BeforeEach` for deleteAll the repository and add some dummy field.  
+  Write a test for GET /parkingBoys and POST /parkingBoys/park.
