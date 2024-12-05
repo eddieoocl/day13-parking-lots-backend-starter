@@ -1,6 +1,7 @@
 package org.afs.pakinglot.domain.strategies;
 
 
+import org.afs.pakinglot.enums.ParkingStrategies;
 import org.afs.pakinglot.model.ParkingLot;
 import org.afs.pakinglot.domain.exception.NoAvailablePositionException;
 
@@ -14,5 +15,10 @@ public class SequentiallyStrategy implements ParkingStrategy {
                 .filter(parkingLot -> !parkingLot.isFull())
                 .findFirst()
                 .orElseThrow(NoAvailablePositionException::new);
+    }
+
+    @Override
+    public String toString() {
+        return ParkingStrategies.Standard.toString();
     }
 }

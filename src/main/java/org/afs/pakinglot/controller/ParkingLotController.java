@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.afs.pakinglot.model.ParkingLot;
 import org.afs.pakinglot.service.ParkingLotService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

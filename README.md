@@ -12,3 +12,6 @@
   The test function name shoud be in the form of should_<expected result>_when_<action>_given_<given condition> Use `@SpringBootTest`, `@AutoConfigureJsonTesters`, `@AutoConfigureMockMvc` and `JacksonTester`.  
   Add a `@BeforeEach` for deleteAll the repository and add some dummy field.  
 - Help me solve this error: "Cannot find a (Map) Key deserializer for type [simple type, class org.afs.pakinglot.model.Ticket]"
+- Help me write a enum called ParkingStrategies that is return the three ParkingStrategy: Standard, Smart, and SuperSmart.   
+  Write an GET API /parkingBoys that return this enum values.
+  Write an POST API /parkingBoys/park that use ParkingBoy to park the car and save it in ticketRepository and carRepository.

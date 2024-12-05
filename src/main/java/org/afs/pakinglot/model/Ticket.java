@@ -1,5 +1,6 @@
 package org.afs.pakinglot.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,6 +16,7 @@ import java.util.Objects;
 @Setter
 public class Ticket {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @OneToOne
@@ -24,6 +26,7 @@ public class Ticket {
 
     @ManyToOne
     @JoinColumn(name = "parking_lot_id")
+    @JsonIgnore
     private ParkingLot parkingLot;
 
     public Ticket(String plateNumber, int position, ParkingLot parkingLot) {

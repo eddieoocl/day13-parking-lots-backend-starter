@@ -1,5 +1,6 @@
 package org.afs.pakinglot.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
@@ -20,9 +21,11 @@ public class Car {
     private String plateNumber;
 
     @OneToOne
+    @JsonIgnore
     private Ticket ticket;
 
     @OneToOne
+    @JsonIgnore
     private ParkingLot parkingLot;
 
     public Car(String plateNumber) {

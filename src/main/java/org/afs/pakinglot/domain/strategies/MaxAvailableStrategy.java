@@ -1,6 +1,7 @@
 package org.afs.pakinglot.domain.strategies;
 
 
+import org.afs.pakinglot.enums.ParkingStrategies;
 import org.afs.pakinglot.model.ParkingLot;
 
 import java.util.Comparator;
@@ -12,5 +13,10 @@ public class MaxAvailableStrategy implements ParkingStrategy{
         return parkingLots.stream()
                 .max(Comparator.comparingInt(ParkingLot::getAvailableCapacity))
                 .orElseThrow();
+    }
+
+    @Override
+    public String toString() {
+        return ParkingStrategies.Smart.toString();
     }
 }
