@@ -40,6 +40,6 @@ public class Ticket {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Ticket ticket = (Ticket) o;
-        return Objects.equals(id, ticket.id);
+        return Objects.equals(id, ticket.id) && Objects.equals(car.getPlateNumber(), ticket.car.getPlateNumber());
     }
 }
