@@ -1,10 +1,13 @@
 package org.afs.pakinglot.controller;
 
 import org.afs.pakinglot.domain.strategies.ParkingStrategy;
+import org.afs.pakinglot.enums.ParkingStrategies;
+import org.afs.pakinglot.model.Car;
 import org.afs.pakinglot.model.ParkingLot;
 import org.afs.pakinglot.model.Ticket;
 import org.afs.pakinglot.repository.CarRepository;
 import org.afs.pakinglot.repository.ParkingLotRepository;
+import org.afs.pakinglot.service.ParkingBoyService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +42,11 @@ class ParkingBoyControllerTest {
     @Autowired
     private JacksonTester<Ticket> ticketJacksonTester;
 
+    @Autowired
+    private JacksonTester<Car> carJacksonTester;
+
+    @Autowired
+    private ParkingBoyService parkingBoyService;
 
     @BeforeEach
     void setUp() {
@@ -83,5 +91,29 @@ class ParkingBoyControllerTest {
         // Then
         final Ticket fetchedTicket = ticketJacksonTester.parseObject(result.getResponse().getContentAsString());
         assertThat(fetchedTicket.getCar().getPlateNumber()).isEqualTo("AB-1234");
+    }
+
+    @Test
+    void should_return_car_when_fetch_given_plate_number_and_car_in_parking_lot() throws Exception {
+        // Given
+        String requestBody = """
+                 {
+                    "plateNumber": "AB-1234"
+                 }\
+                """;
+        parkingBoyService.park("AB-1234", ParkingStrategies.Standard);
+
+        // When
+        final MvcResult result = client.perform(post("/parkingBoys/fetch")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(requestBody))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+                .andReturn();
+
+        // Then
+        final Car fetchedCar = carJacksonTester.parseObject(result.getResponse().getContentAsString());
+        assertThat(fetchedCar.getPlateNumber()).isEqualTo("AB-1234");
     }
 }

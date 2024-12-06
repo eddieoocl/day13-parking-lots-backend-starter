@@ -1,5 +1,6 @@
 package org.afs.pakinglot.service;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import org.afs.pakinglot.domain.ParkingBoy;
 import org.afs.pakinglot.domain.strategies.AvailableRateStrategy;
@@ -8,6 +9,7 @@ import org.afs.pakinglot.domain.strategies.ParkingStrategy;
 import org.afs.pakinglot.domain.strategies.SequentiallyStrategy;
 import org.afs.pakinglot.dto.ParkRequestDto;
 import org.afs.pakinglot.enums.ParkingStrategies;
+import org.afs.pakinglot.exception.CarNotFoundException;
 import org.afs.pakinglot.model.Car;
 import org.afs.pakinglot.model.Ticket;
 import org.afs.pakinglot.repository.CarRepository;
@@ -41,11 +43,21 @@ public class ParkingBoyService {
         Car car = findCar(plateNumber);
         Ticket ticket = parkingBoy.park(car);
 
-        Ticket savedTicket = ticketRepository.save(ticket);
+        return ticketRepository.save(ticket);
+    }
 
-        car.setTicket(savedTicket);
+    public Car fetch(String plateNumber) throws CarNotFoundException {
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLotRepository.findAll());
+        Ticket ticket = ticketRepository.findByCarPlateNumber(plateNumber);
+        if (ticket == null) {
+            throw new CarNotFoundException();
+        }
+        Car car = ticket.getCar();
+        parkingBoy.fetch(ticket);
 
-        return savedTicket;
+        ticketRepository.delete(ticket);
+
+        return car;
     }
 
     private Car findCar(String plateNumber) {

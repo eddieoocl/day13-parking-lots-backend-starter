@@ -15,15 +15,10 @@ import java.util.Objects;
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 public class Car {
     @Id
     private String plateNumber;
-
-    @JsonIgnore
-    @OneToOne(cascade = CascadeType.MERGE, orphanRemoval = true)
-    private Ticket ticket;
 
     public Car(String plateNumber) {
         this.plateNumber = plateNumber;

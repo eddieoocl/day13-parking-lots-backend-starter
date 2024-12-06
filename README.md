@@ -19,3 +19,6 @@
   The test function name should be in the form of should_<expected result>_when_<action>_given_<given condition> Use `@SpringBootTest`, `@AutoConfigureJsonTesters`, `@AutoConfigureMockMvc` and `JacksonTester`.  
   Add a `@BeforeEach` for deleteAll the repository and add some dummy field.  
   Write a test for GET /parkingBoys and POST /parkingBoys/park.
+- Please help me add POST /parkingBoys/fetch test in ParkingBoyControllerTest.  
+  The test function name should be in the form of should_<expected result>_when_<action>_given_<given condition> Use `@SpringBootTest`, `@AutoConfigureJsonTesters`, `@AutoConfigureMockMvc` and `JacksonTester`.  
+  Add a `@BeforeEach` for deleteAll the repository and add some dummy field. 

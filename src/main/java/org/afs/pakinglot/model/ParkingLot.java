@@ -53,7 +53,7 @@ public class ParkingLot {
             throw new NoAvailablePositionException();
         }
 
-        Ticket ticket = new Ticket(car.getPlateNumber(), tickets.size() + 1, this);
+        Ticket ticket = new Ticket(car.getPlateNumber(), findEmptyPosition(), this);
         tickets.add(ticket);
         return ticket;
     }
@@ -75,6 +75,20 @@ public class ParkingLot {
 
     public boolean contains(Ticket ticket) {
         return tickets.contains(ticket);
+    }
+
+    public int findEmptyPosition() {
+        if (isFull()) {
+            throw new NoAvailablePositionException();
+        }
+
+        for (int position = 1; position <= capacity; position++) {
+            int finalPosition = position;
+            if (tickets.stream().noneMatch(ticket -> ticket.getPosition() == finalPosition)) {
+                return position;
+            }
+        }
+        throw new NoAvailablePositionException();
     }
 
     @JsonIgnore
